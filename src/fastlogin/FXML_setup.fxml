@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minWidth="-Infinity" prefHeight="710.0" prefWidth="265.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastlogin.FXML_setupController">
+   <children>
+      <Button fx:id="btn_s0" layoutX="15.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F1">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s1" layoutX="15.0" layoutY="130.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s2" layoutX="15.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F3">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s3" layoutX="15.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F4">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s4" layoutX="15.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s5" layoutX="15.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F6">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+
+      <Button fx:id="btn_back" layoutX="190.0" layoutY="14.0" mnemonicParsing="false" onAction="#click_btn_back" prefHeight="30.0" prefWidth="59.0" text="Back" />
+      <TextField fx:id="txtfld_gameLoc" layoutX="13.0" layoutY="53.0" prefHeight="22.0" prefWidth="174.0" visible="false" />
+      <TextField fx:id="txtf_0" layoutX="77.0" layoutY="93.0" />
+      <TextField fx:id="txtf_1" layoutX="77.0" layoutY="144.0" />
+      <TextField fx:id="txtf_4" layoutX="77.0" layoutY="303.0" />
+      <TextField fx:id="txtf_3" layoutX="77.0" layoutY="242.0" />
+      <TextField fx:id="txtf_2" layoutX="77.0" layoutY="192.0" />
+      <TextField fx:id="txtf_5" layoutX="77.0" layoutY="353.0" />
+      <ImageView fx:id="imgVw_0" fitHeight="24.0" fitWidth="24.0" layoutX="226.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_1" fitHeight="24.0" fitWidth="24.0" layoutX="226.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_2" fitHeight="24.0" fitWidth="24.0" layoutX="226.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_3" fitHeight="24.0" fitWidth="24.0" layoutX="226.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_4" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_5" fitHeight="24.0" fitWidth="24.0" layoutX="226.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lbl_gameLoc" layoutX="15.0" layoutY="53.0" prefHeight="22.0" prefWidth="174.0" />
+      <Button fx:id="btn_change" layoutX="191.0" layoutY="51.0" mnemonicParsing="false" onAction="#click_btn_change" text="Change" />
+      <Button fx:id="btn_save" cancelButton="true" layoutX="191.0" layoutY="51.0" mnemonicParsing="false" onAction="#click_btn_save" prefHeight="22.0" prefWidth="53.0" text="Save" visible="false" />
+      <Button fx:id="btn_s6" layoutX="15.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F7">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s7" layoutX="15.0" layoutY="440.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F8">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s8" layoutX="15.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F9">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s9" layoutX="15.0" layoutY="550.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F10">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s10" layoutX="15.0" layoutY="600.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F11">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_s11" layoutX="15.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#click_btn" prefHeight="50.0" prefWidth="50.0" text="F12">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="26.0" layoutY="36.0" prefHeight="17.0" prefWidth="149.0" text="Path to client La2" />
+      <TextField fx:id="txtf_6" layoutX="77.0" layoutY="403.0" />
+      <TextField fx:id="txtf_7" layoutX="77.0" layoutY="453.0" />
+      <TextField fx:id="txtf_8" layoutX="77.0" layoutY="513.0" />
+      <TextField fx:id="txtf_9" layoutX="77.0" layoutY="563.0" />
+      <TextField fx:id="txtf_10" layoutX="77.0" layoutY="613.0" />
+      <TextField fx:id="txtf_11" layoutX="77.0" layoutY="663.0" />
+      <ImageView fx:id="imgVw_6" fitHeight="24.0" fitWidth="24.0" layoutX="225.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_7" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_8" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_9" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_10" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="613.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgVw_11" fitHeight="24.0" fitWidth="24.0" layoutX="227.0" layoutY="663.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
