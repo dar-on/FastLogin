@@ -31,27 +31,11 @@ public class FastLogin extends Application {
     public static final int COUNT = 12;
     static final String PATH_TO_PROPERTIES = "config.properties";
     static Properties prop;
-    
-//    public static String activ;
-//    public static String name0;
-//    public static String name1;
-//    public static String name2;
-//    public static String name3;
-//    public static String name4;
-//    public static String name5;
-//    
-//    public static String key1;
-//    public static String key2;
-//    public static String key3;
-//    public static String key4;
-//    public static String key5;
-//    public static String key6;
-//    
+
     public static String[] btn_acts = new String[COUNT];
     public static String[] names = new String[COUNT];
     public static String clientPath;
     public static String clientIniPath = "asterios/AsteriosGame.ini";
-    //public static String clientFile = "AsteriosGame.ini";
     
     @Override
     public void start(Stage stage) throws Exception {
