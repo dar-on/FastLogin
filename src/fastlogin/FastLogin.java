@@ -40,7 +40,7 @@ public class FastLogin extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         initFL();
-        System.out.println(btn_acts[0]);
+        
         FXMLLoader loader1 = new FXMLLoader(getClass().getResource("FXML.fxml"));
         root1 = loader1.load();
         myHandler1 = (FXMLController)loader1.getController();
@@ -49,7 +49,6 @@ public class FastLogin extends Application {
         root2 = loader2.load();
         myHandler2 = (FXML_setupController)loader2.getController();
        
-        
         scene = new Scene(root1);
         
         stage.setScene(scene);
