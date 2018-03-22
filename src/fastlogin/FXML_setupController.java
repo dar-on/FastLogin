@@ -336,25 +336,4 @@ public class FXML_setupController implements Initializable {
         
     }
     
-//    String getKey(){
-//        //System.out.println("newname0"+newName);
-//        File file = new File(FastLogin.clientPath+FastLogin.clientIniPath);
-//        if(file.exists()){
-//            try (BufferedReader br = new BufferedReader(new FileReader(file))){
-//                String s;
-//                //System.out.println("newname1"+newName);
-//                while((s=br.readLine())!=null){
-//                    if(s.contains("Key")){
-//                        hashKey = s.substring(4);
-//                    }
-//                }
-//                br.close();
-//                return hashKey;
-//            } catch (IOException ex) {
-//                Logger.getLogger(FXML_setupController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return null;
-//        
-//    }
 }    
