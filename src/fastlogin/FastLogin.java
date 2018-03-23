@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,10 +33,13 @@ public class FastLogin extends Application {
     static final String PATH_TO_PROPERTIES = "config.properties";
     static Properties prop;
 
-    public static String[] btn_acts = new String[COUNT];
-    public static String[] names = new String[COUNT];
+    //public static String[] btn_acts = new String[COUNT];
+    //public static String[] names = new String[COUNT];
     public static String clientPath;
     public static String clientIniPath = "asterios/AsteriosGame.ini";
+    
+    static ArrayList<LoginSet> arrLB = new ArrayList<>();
+    
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -64,50 +68,83 @@ public class FastLogin extends Application {
         launch(args);
     }
     
-    public static void initFL(){
-
-        try {
-            File outFile = new File("config.properties");
-            if(!outFile.exists()){
-                OutputStream os;
-                try (InputStream is = FastLogin.class.getResourceAsStream(PATH_TO_PROPERTIES)) {
-                    os = new FileOutputStream(PATH_TO_PROPERTIES);
-                    outFile.createNewFile();
-                    int b;
-                    while((b = is.read()) != -1){
-                        os.write(b);
-                    }
-                }
-                os.close();
-            }
-        }   catch (FileNotFoundException ex) {
-            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+    static void initFL(){
+        createLoginSets(getProperties());
+    }
+    
+    static void createLoginSets(Properties prop){
+        for(int i=0;i<COUNT;i++){
+            arrLB.add(new LoginSet());
         }
-        
-        //прочитать данные из файла
+    }
+    
+    static void getClientPath(Properties prop){
+        clientPath = prop.getProperty("path");
+    }
+    
+    static Properties getProperties(){
+        InputStream is = null;
         try {
-            InputStream is = new FileInputStream(PATH_TO_PROPERTIES);
-            Properties prop = new Properties();
+            is = new FileInputStream(PATH_TO_PROPERTIES);
+            prop = new Properties();
             prop.load(is);
-            
-            for(int i=0;i<COUNT;i++){
-                btn_acts[i] = prop.getProperty("btn_act"+i);
-            }
-            
-            for(int i=0;i<COUNT;i++){
-                names[i] = prop.getProperty("name"+i);
-            }
-            
-            clientPath = prop.getProperty("path");
-            //iniPath = clientPath+"asterios/";
-            
-            is.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                is.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return prop;
     }
+//    public static void initFL(){
+//
+//        try {
+//            File outFile = new File("config.properties");
+//            if(!outFile.exists()){
+//                OutputStream os;
+//                try (InputStream is = FastLogin.class.getResourceAsStream(PATH_TO_PROPERTIES)) {
+//                    os = new FileOutputStream(PATH_TO_PROPERTIES);
+//                    outFile.createNewFile();
+//                    int b;
+//                    while((b = is.read()) != -1){
+//                        os.write(b);
+//                    }
+//                }
+//                os.close();
+//            }
+//        }   catch (FileNotFoundException ex) {
+//            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        //прочитать данные из файла
+//        try {
+//            InputStream is = new FileInputStream(PATH_TO_PROPERTIES);
+//            Properties prop = new Properties();
+//            prop.load(is);
+//            
+//            for(int i=0;i<COUNT;i++){
+//                btn_acts[i] = prop.getProperty("btn_act"+i);
+//            }
+//            
+//            for(int i=0;i<COUNT;i++){
+//                names[i] = prop.getProperty("name"+i);
+//            }
+//            
+//            clientPath = prop.getProperty("path");
+//            //iniPath = clientPath+"asterios/";
+//            
+//            is.close();
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FastLogin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

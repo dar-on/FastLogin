@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -124,11 +125,10 @@ public class FXML_setupController implements Initializable {
     private Button btn_change;
 
     String hashKey;
-    Image imageKey;
     TextField[] arr_txtf = new TextField[FastLogin.COUNT];
     ImageView[] arr_imgVw = new ImageView[FastLogin.COUNT];
-
-
+    Image imageKey = new Image(this.getClass().getResourceAsStream("key-24x24.png"));
+    ArrayList<LoginSet> arrLB = FastLogin.arrLB;
 
 
     /**
@@ -136,9 +136,56 @@ public class FXML_setupController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        myInitSetup();
+        createArrayElementsGUI();
+        dataToElementsGUI();
         // TODO
     }    
+                    //INIT
+    void createArrayElementsGUI(){
+        arr_txtf[0] = txtf_0;
+        arr_txtf[1] = txtf_1;
+        arr_txtf[2] = txtf_2;
+        arr_txtf[3] = txtf_3;
+        arr_txtf[4] = txtf_4;
+        arr_txtf[5] = txtf_5;
+        arr_txtf[6] = txtf_6;
+        arr_txtf[7] = txtf_7;
+        arr_txtf[8] = txtf_8;
+        arr_txtf[9] = txtf_9;
+        arr_txtf[10] = txtf_10;
+        arr_txtf[11] = txtf_11;
+        
+        arr_imgVw[0] = imgVw_0;
+        arr_imgVw[1] = imgVw_1;
+        arr_imgVw[2] = imgVw_2;
+        arr_imgVw[3] = imgVw_3;
+        arr_imgVw[4] = imgVw_4;
+        arr_imgVw[5] = imgVw_5;
+        arr_imgVw[6] = imgVw_6;
+        arr_imgVw[7] = imgVw_7;
+        arr_imgVw[8] = imgVw_8;
+        arr_imgVw[9] = imgVw_9;
+        arr_imgVw[10] = imgVw_10;
+        arr_imgVw[11] = imgVw_11;
+    }    
+        
+    void dataToElementsGUI(){
+        for(int i=0;i<FastLogin.COUNT;i++){
+            if(arrLB.get(i).isActive()){
+                arr_imgVw[i].setImage(imageKey);
+                arr_imgVw[i].setVisible(true);
+                arr_txtf[i].setText(arrLB.get(i).getName());
+            }else{
+                arr_imgVw[i].setVisible(false);
+                arr_txtf[i].setText("");
+            }
+        }
+        lbl_gameLoc.setVisible(true);
+        lbl_gameLoc.setText(FastLogin.clientPath);
+        txtfld_gameLoc.setVisible(false);
+        btn_change.setVisible(true);
+        btn_save.setVisible(false);     
+    }
     
     @FXML       //push F1-F6
     private void click_btn_sF(ActionEvent event) {
@@ -154,10 +201,10 @@ public class FXML_setupController implements Initializable {
         int n = Integer.parseInt(s);
         if(event.isControlDown()){
             
-            System.out.println("ctrl+click");
+            //System.out.println("ctrl+click");
             clrLoginKey(n);
         }else{
-            if(!FastLogin.btn_acts[n].equalsIgnoreCase("1")){
+            if(!arrLB.get(n).isActive()){
                 setLoginKey(n);
             } 
         }
@@ -228,55 +275,8 @@ public class FXML_setupController implements Initializable {
         btn_change.setVisible(false);
         btn_save.setVisible(true);        
     }
-                //INIT
-    void myInitSetup(){
-        arr_txtf[0] = txtf_0;
-        arr_txtf[1] = txtf_1;
-        arr_txtf[2] = txtf_2;
-        arr_txtf[3] = txtf_3;
-        arr_txtf[4] = txtf_4;
-        arr_txtf[5] = txtf_5;
-        arr_txtf[6] = txtf_6;
-        arr_txtf[7] = txtf_7;
-        arr_txtf[8] = txtf_8;
-        arr_txtf[9] = txtf_9;
-        arr_txtf[10] = txtf_10;
-        arr_txtf[11] = txtf_11;
-        
-        arr_imgVw[0] = imgVw_0;
-        arr_imgVw[1] = imgVw_1;
-        arr_imgVw[2] = imgVw_2;
-        arr_imgVw[3] = imgVw_3;
-        arr_imgVw[4] = imgVw_4;
-        arr_imgVw[5] = imgVw_5;
-        arr_imgVw[6] = imgVw_6;
-        arr_imgVw[7] = imgVw_7;
-        arr_imgVw[8] = imgVw_8;
-        arr_imgVw[9] = imgVw_9;
-        arr_imgVw[10] = imgVw_10;
-        arr_imgVw[11] = imgVw_11;
-        
-        imageKey = new Image(this.getClass().getResourceAsStream("key-24x24.png"));
-        
-        for(int i=0;i<6;i++){
-            if(FastLogin.btn_acts[i].equalsIgnoreCase("1")){
-                arr_imgVw[i].setImage(imageKey);
-                arr_imgVw[i].setVisible(true);
-                arr_txtf[i].setText(FastLogin.names[i]);
-            }else{
-                arr_imgVw[i].setVisible(false);
-                arr_txtf[i].setText("");
-            }
-            
-        }
-        lbl_gameLoc.setVisible(true);
-        lbl_gameLoc.setText(FastLogin.clientPath);
-        txtfld_gameLoc.setVisible(false);
-        btn_change.setVisible(true);
-        btn_save.setVisible(false);  
-        
-        
-    }
+
+
   
     void setLoginKey(int btnNum){
         if(!arr_txtf[btnNum].getText().isEmpty()){
@@ -308,17 +308,17 @@ public class FXML_setupController implements Initializable {
     }
     
     void clrLoginKey(int btnNum){
-        writeProp(btnNum, "0", "null", "null");
+        writeProp(btnNum, "0", "", "");
         arr_txtf[btnNum].setText("");
         arr_imgVw[btnNum].setVisible(false);        
     }
     
     void writeProp(int btnNum,String btn_act, String name, String key){
         try {
-            Properties prop = new Properties();
-            InputStream is = new FileInputStream(FastLogin.PATH_TO_PROPERTIES);
-            prop.load(is);
-            is.close();
+           // Properties prop = new Properties();
+           // InputStream is = new FileInputStream(FastLogin.PATH_TO_PROPERTIES);
+           // prop.load(is);
+           // is.close();
             prop.setProperty("btn_act"+btnNum, btn_act);
             FastLogin.btn_acts[btnNum] = btn_act;
             System.out.println("newname"+name);

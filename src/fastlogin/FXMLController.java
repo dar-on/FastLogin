@@ -5,6 +5,9 @@
  */
 package fastlogin;
 
+import static fastlogin.FastLogin.COUNT;
+import static fastlogin.FastLogin.arrLB;
+import static fastlogin.FastLogin.clientPath;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -26,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 
 /**
  *
@@ -91,25 +96,35 @@ public class FXMLController implements Initializable {
     Label[] arrLbl = new Label[FastLogin.COUNT];
     Button[] arrBtn = new Button[FastLogin.COUNT];
     static File tmpFile;
+    
+//    ArrayList<LoginSet> arrLB;
 
+//    public FXMLController() {
+//        this.arrLB = FastLogin.arrLB;
+//    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        myInitMain();
+        getLoginSetsData(FastLogin.getProperties());
+        getClientPath(FastLogin.getProperties());
+        createArrayElementsGUI();
+        dataToArrayElementsGUI();
     }    
     
-    @FXML       //CLICK F1-12
-    private void click_btnF(ActionEvent event) {
-        String s = ((Button)event.getSource()).getId().substring(4);
-        int n = Integer.parseInt(s);
-        startGame(n);
+    void getLoginSetsData(Properties prop){
+        for(int i=0;i<COUNT;i++){
+            boolean active = prop.getProperty("btn_act"+i).equals("1");
+            String name = prop.getProperty("name"+i);
+            String key = prop.getProperty("key"+i);
+            arrLB.get(i).setAll(active, name, key);
+        }
     }
-
-    @FXML       //SETTING
-    private void click_btn_setting(ActionEvent event) {
-        FastLogin.scene.setRoot(FastLogin.root2);
+    
+    void getClientPath(Properties prop){
+        clientPath = prop.getProperty("path");
     }
-
-    void myInitMain(){
+    
+    void createArrayElementsGUI(){
         arrLbl[0] = lbl_0;
         arrLbl[1] = lbl_1;
         arrLbl[2] = lbl_2;
@@ -135,16 +150,14 @@ public class FXMLController implements Initializable {
         arrBtn[9] = btn_9;
         arrBtn[10] = btn_10;
         arrBtn[11] = btn_11; 
-        dataToGui();
-
     }
 
-    void dataToGui(){
+    void dataToArrayElementsGUI(){
                 //запись данных в гуи мейна
         for (int i=0;i<FastLogin.COUNT;i++) {
-            System.out.println(FastLogin.btn_acts[i]);
-            if(FastLogin.btn_acts[i].equals("1")){
-                arrLbl[i].setText(FastLogin.names[i]);
+            //System.out.println(FastLogin.btn_acts[i]);
+            if(arrLB.get(i).isActive()){
+                arrLbl[i].setText(arrLB.get(i).getName());
                 arrBtn[i].setText("F"+(i+1));
             }else{
                 arrLbl[i].setText("");
@@ -153,15 +166,28 @@ public class FXMLController implements Initializable {
         }
     }
     
+    @FXML       //CLICK F1-12
+    private void click_btnF(ActionEvent event) {
+        String s = ((Button)event.getSource()).getId().substring(4);
+        int n = Integer.parseInt(s);
+        startGame(n);
+    }
+
+    @FXML       //SETTING
+    private void click_btn_setting(ActionEvent event) {
+        FastLogin.scene.setRoot(FastLogin.root2);
+    }
+
     void startGame(int btnNum){
-        if(FastLogin.btn_acts[btnNum].equalsIgnoreCase("1")){
+        if(arrLB.get(btnNum).isActive()){
             File fileIni = new File(FastLogin.clientPath+FastLogin.clientIniPath);
             if(fileIni.exists()){
                 FileInputStream fis;
                 try (BufferedReader br = new BufferedReader(new FileReader(fileIni))){
                     tmpFile = File.createTempFile("AsteriosGame", ".tmp");
                     FileWriter fw = new  FileWriter(tmpFile,true);
-                    String hashKey = getKey(btnNum);
+                    //String hashKey = getKey(btnNum);
+                    String hashKey = arrLB.get(btnNum).getKey();
                     System.out.println(hashKey);
                     String s;
                     while((s=br.readLine())!=null){
@@ -198,30 +224,30 @@ public class FXMLController implements Initializable {
         }  
     }  
     
-    String getKey(int btnNum){
-      
-        InputStream is = null;
-        String key = null;
-        try {
-            Properties prop = new Properties();
-            is = new FileInputStream(FastLogin.PATH_TO_PROPERTIES);
-            prop.load(is);
-            is.close();
-             key = prop.getProperty("key"+btnNum);
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return key;
-    }
+//    String getKey(int btnNum){
+//      
+//        InputStream is = null;
+//        String key = null;
+//        try {
+//            Properties prop = new Properties();
+//            is = new FileInputStream(FastLogin.PATH_TO_PROPERTIES);
+//            prop.load(is);
+//            is.close();
+//             key = prop.getProperty("key"+btnNum);
+//            
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                is.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return key;
+//    }
 
     @FXML
     private void push_keyF(KeyEvent event) {
