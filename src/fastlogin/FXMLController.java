@@ -95,6 +95,7 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         myInitMain();
+        System.out.println("init_ctrl");
     }    
     
     @FXML       //CLICK F1-12
@@ -142,7 +143,7 @@ public class FXMLController implements Initializable {
     void dataToGui(){
                 //запись данных в гуи мейна
         for (int i=0;i<FastLogin.COUNT;i++) {
-            System.out.println(FastLogin.btn_acts[i]);
+            System.out.println(FastLogin.btn_acts[i]+"dataToGui");
             if(FastLogin.btn_acts[i].equals("1")){
                 arrLbl[i].setText(FastLogin.names[i]);
                 arrBtn[i].setText("F"+(i+1));
